@@ -1,2 +1,2 @@
-# MyProjects
-My coding projects and scripts
+# Snake Game project
+Written in C++ using raylib for gui
