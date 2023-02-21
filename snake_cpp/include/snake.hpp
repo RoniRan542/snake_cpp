@@ -1,1 +1,1 @@
-/home/rani/GitHub/snake_cpp/snake/snake.hpp
+/home/rani/snake_git/snake_cpp/snake_cpp/snake/snake.hpp

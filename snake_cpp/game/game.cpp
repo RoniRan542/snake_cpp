@@ -31,8 +31,14 @@ void Game::StartGame()
     camera.rotation = 0;
     camera.zoom = 1;
 
+    bool start_game = false;
     while (!WindowShouldClose())
     {
+        if (IsKeyPressed(KEY_RIGHT))
+        {
+            start_game = true;
+        }
+
         try
         {
             std::list<std::pair<uint32_t, uint32_t>> snake_list = m_snake->GetSnake();
@@ -55,18 +61,24 @@ void Game::StartGame()
                 m_snake->ChangeDirection(RIGHT);
             }
 
-            m_snake->UpdateSnakePos();
-            snake_list = m_snake->GetSnake();
-            if (snake_list.front() == m_board->GetFood())
-            {
-                m_snake->EnlargeSnake();
-                m_board->SetFood(snake_list);
-            }
-
             BeginDrawing();
             ClearBackground(BLUE);
-
             BeginMode2D(camera);
+            if (start_game)
+            {
+                m_snake->UpdateSnakePos();
+                snake_list = m_snake->GetSnake();
+                if (snake_list.front() == m_board->GetFood())
+                {
+                    m_snake->EnlargeSnake();
+                    m_board->SetFood(snake_list);
+                }
+            }
+            else
+            {
+                DrawText("Press -> key to start! ", (m_screenWidth * 2) / 6, m_screenHeight / 3, 50, DARKPURPLE);
+            }
+
             for (; snake_it != snake_list.end(); snake_it++)
             {
                 Rectangle rec = {bo[snake_it->first][snake_it->second].GetDLPoint().first, bo[snake_it->first][snake_it->second].GetDLPoint().second, 60, 60};
