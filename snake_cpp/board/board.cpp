@@ -7,20 +7,20 @@
 
 #include "board.hpp"
 
-Board::Board(uint32_t block_width, uint32_t block_height, uint32_t window_width, uint32_t window_height)
+Board::Board(uint32_t block_width, uint32_t block_height, uint32_t windowSize)
 {
-    Init(block_width, block_height, window_width, window_height);
+    Init(block_width, block_height, windowSize);
     m_block_width = block_width;
 }
 
-void Board::Init(uint32_t block_width, uint32_t block_height, uint32_t window_width, uint32_t window_height)
+void Board::Init(uint32_t block_width, uint32_t block_height, uint32_t windowSize)
 {
-    uint32_t actual_window_width = (window_width / block_width) * block_width;
-    uint32_t actual_window_height = (window_height / block_height) * block_height;
-    board_squares_2d.resize((window_width / block_width));
-    for (int i = 0; i < (window_width / block_width); i++)
+    uint32_t actual_window_width = (windowSize / block_width) * block_width;
+    uint32_t actual_window_height = (windowSize / block_height) * block_height;
+    board_squares_2d.resize((windowSize / block_width));
+    for (uint32_t i = 0; i < (windowSize / block_width); i++)
     {
-        board_squares_2d[i].resize((window_height / block_height));
+        board_squares_2d[i].resize((windowSize / block_height));
     }
 
     std::pair<uint32_t, uint32_t> lower_point = {0, 0};

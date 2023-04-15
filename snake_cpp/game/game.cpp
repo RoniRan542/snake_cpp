@@ -8,11 +8,11 @@
 #include "square.hpp"
 #include "snake.hpp"
 
-Game::Game(float screenWidth, float screenHeight, enum Level level)
-    : m_board(new Board(60, 60, screenWidth, screenHeight)),
+Game::Game(float screenSize, enum Level level)
+    : m_board(new Board(60, 60, screenSize)),
       m_snake(new Snake(std::pair<uint32_t, uint32_t>(7, 7), 3)),
-      m_screenWidth(screenWidth),
-      m_screenHeight(screenHeight),
+      m_screenWidth(screenSize),
+      m_screenHeight(screenSize),
       m_level(level)
 {
     m_board->SetFood(m_snake->GetSnake());
@@ -62,7 +62,7 @@ void Game::StartGame()
             }
 
             BeginDrawing();
-            ClearBackground(BLUE);
+            ClearBackground(WHITE);
             BeginMode2D(camera);
             if (start_game)
             {
@@ -86,7 +86,7 @@ void Game::StartGame()
             }
 
             Rectangle rec = {bo[m_board->GetFood().first][m_board->GetFood().second].GetDLPoint().first, bo[m_board->GetFood().first][m_board->GetFood().second].GetDLPoint().second, 60, 60};
-            DrawRectangleRec(rec, GREEN);
+            DrawRectangleRec(rec, PURPLE);
 
             EndMode2D();
 
@@ -103,7 +103,11 @@ void Game::StartGame()
 
             EndDrawing();
             std::this_thread::sleep_for(std::chrono::seconds(1));
-            exit(0);
+            delete this->m_board;
+            delete this->m_snake;
+            this->m_board = new Board(60, 60, m_screenWidth);
+            this->m_snake = new Snake(std::pair<uint32_t, uint32_t>(7, 7), 3);
+            start_game = false;
         }
     }
 }

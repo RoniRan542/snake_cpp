@@ -11,8 +11,12 @@ int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
+
     Game game;
+
     game.StartGame();
+
+    game.~Game();
 
     return 0;
 }

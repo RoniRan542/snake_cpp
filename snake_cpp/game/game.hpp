@@ -16,7 +16,7 @@ enum Level
 class Game
 {
 public:
-    Game(float screenWidth = 960, float screenHeight = 960, enum Level level = BEGINNER);
+    Game(float screenSize = 960, enum Level level = BEGINNER);
     Game(const Game &other) = delete;
     Game(Game &&) = delete;
     const Game &operator=(const Game &other) = delete;
